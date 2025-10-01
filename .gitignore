@@ -1,0 +1,5 @@
+./src/knowledgebase.pro
+data
+.pyre
+__pycache__
+./src/.pyre
