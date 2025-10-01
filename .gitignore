@@ -3,3 +3,4 @@ data
 .pyre
 __pycache__
 ./src/.pyre
+*.pro
