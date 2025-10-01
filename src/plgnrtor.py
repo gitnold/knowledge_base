@@ -1,6 +1,7 @@
 import data
 import pandas as pd
 from enum import Enum, auto
+import ast
 
 class ColumnType(Enum):
     SYMPTOM = auto(),
@@ -19,9 +20,9 @@ def run():
     #running the code generator.
     write_facts_to_file(generate_disease_facts(df_b))
     write_facts_to_file(generate_pest_facts(df_a))
-    write_facts_to_file(generate_symptoms(dataframe, ColumnType.SYMPTOM))
-    write_facts_to_file(generate_symptoms(dataframe, ColumnType.CONTROL))
-    write_facts_to_file(generate_symptoms(dataframe, ColumnType.TREATMENT))
+    write_facts_to_file(generate_list_facts(dataframe, ColumnType.SYMPTOM))
+    write_facts_to_file(generate_list_facts(dataframe, ColumnType.CONTROL))
+    write_facts_to_file(generate_list_facts(dataframe, ColumnType.TREATMENT))
 
 def generate_disease_facts(dataframe: pd.DataFrame) -> list[str]:
     diseases = dataframe["name"].to_list()
@@ -73,35 +74,43 @@ def generate_rules():
     pass
 
 #TODO: make function below generic of sorts.
-def generate_symptoms(dataframe: pd.DataFrame, relation: ColumnType) -> list[str]:
+def generate_list_facts(dataframe: pd.DataFrame, relation: ColumnType) -> list[str]:
     prolog_facts = list()
     names = dataframe['name'].to_list()
-    values = dataframe['symptoms'].to_list()
     count = 0
-    
-    #TODO: find a way of eliminating the redundacy below.
+    current_value = ""
+
+    # Choose the correct column and relation name
     match relation:
         case ColumnType.SYMPTOM:
             values = dataframe['symptoms'].to_list()
-            for symptom in values:
-                prolog_facts.append(f"symptoms('{names[count]}', {[s.strip('"') for s in symptom.strip('"[]"').split(',')]}).\n")
-                count += 1
+            current_value = "symptoms"
 
         case ColumnType.TREATMENT:
             values = dataframe['treatments'].to_list()
-            for treatment in values:
-                prolog_facts.append(f"treatment('{names[count]}', {[s.strip('"') for s in treatment.strip('"[]"').split(',')]}).\n")
-                count += 1
+            current_value = "treatments"
 
         case ColumnType.CONTROL:
             values = dataframe['control_methods'].to_list()
-            for control in values:
-                prolog_facts.append(f"controlmethods('{names[count]}', {[s.strip('"') for s in control.strip('"[]"').split(',')]}).\n")
-                count += 1
+            current_value = "controlMethods"
 
+    # Process each entry
+    for value in values:
+        # Safely convert stringified list → Python list
+        try:
+            parsed_list = ast.literal_eval(value) if isinstance(value, str) else value
+        except Exception:
+            parsed_list = [value]
+
+        # Wrap each entry as a single-quoted atom for Prolog
+        cleaned = [f"'{s.strip()}'" for s in parsed_list]
+
+        prolog_facts.append(
+            f"{current_value}('{names[count]}', [{', '.join(cleaned)}]).\n"
+        )
+        count += 1
 
     return prolog_facts
-
 
 
 
