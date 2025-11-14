@@ -1,0 +1,99 @@
+[
+  {
+    "name":"Macadamia husk spot",
+    "type":"disease",
+    "causal_agent":"Pseudocercospora macadamiae (fungus)",
+    "symptoms":[
+      "Small dark spots on husk surface",
+      "Can coalesce into large blemishes",
+      "May cause premature nut drop"
+    ],
+    "treatments":[
+      "Fungicide sprays (copper-based, strobilurins)",
+      "Good orchard sanitation"
+    ],
+    "region":"Australia, South Africa",
+    "control_methods":[
+      "Chemical control",
+      "Cultural practices"
+    ]
+  },
+  {
+    "name":"Phytophthora root rot",
+    "type":"disease",
+    "causal_agent":"Phytophthora cinnamomi (oomycete)",
+    "symptoms":[
+      "Yellowing leaves",
+      "Wilting",
+      "Root necrosis",
+      "Tree death in severe cases"
+    ],
+    "treatments":[
+      "Phosphite trunk injection",
+      "Improve drainage",
+      "Avoid waterlogging"
+    ],
+    "region":"Worldwide (macadamia-growing regions)",
+    "control_methods":[
+      "Chemical control",
+      "Cultural control"
+    ]
+  },
+  {
+    "name":"Macadamia nut borer",
+    "type":"pest",
+    "causal_agent":"Thaumatotibia batrachopa (moth)",
+    "symptoms":[
+      "Larvae bore into nut",
+      "Premature nut drop",
+      "Kernel damage"
+    ],
+    "treatments":[
+      "Biological control with Trichogramma wasps",
+      "Insecticide sprays (region-specific)"
+    ],
+    "region":"Africa, Australia",
+    "control_methods":[
+      "Biological control",
+      "Chemical control"
+    ]
+  },
+  {
+    "name":"Stink bugs",
+    "type":"pest",
+    "causal_agent":"Nezara viridula, Bathycoelia distincta (bugs)",
+    "symptoms":[
+      "Nut drop",
+      "Kernel necrosis (brown lesions)",
+      "Premature ripening"
+    ],
+    "treatments":[
+      "Insecticides (where permitted)",
+      "Monitoring and trapping"
+    ],
+    "region":"Africa, Asia, Americas",
+    "control_methods":[
+      "Chemical control",
+      "Monitoring"
+    ]
+  },
+  {
+    "name":"Macadamia felted coccid",
+    "type":"pest",
+    "causal_agent":"Eriococcus ironsidei (scale insect)",
+    "symptoms":[
+      "White felt-like covering on twigs",
+      "Twig dieback",
+      "Reduced nut yield"
+    ],
+    "treatments":[
+      "Biological control with natural predators",
+      "Horticultural oils"
+    ],
+    "region":"Australia, South Africa, Hawaii",
+    "control_methods":[
+      "Biological control",
+      "Chemical control"
+    ]
+  }
+]

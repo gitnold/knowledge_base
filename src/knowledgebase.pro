@@ -2,15 +2,15 @@ disease('Macadamia husk spot').
 disease('Phytophthora root rot').
 disease('Raceme Blight').
 disease('Macadamia Quick Decline').
-found('Macadamia husk spot', ['Australia', ' South Africa']).
-found('Phytophthora root rot', ['Worldwide (macadamia-growing regions)']).
-found('Raceme Blight', ['high altitude']).
-found('Macadamia Quick Decline', ['high rainfall areas']).
 pest('Macadamia nut borer').
 pest('Stink bugs').
 pest('Macadamia felted coccid').
 pest('Roof Rats').
 pest('Feral pigs').
+found('Macadamia husk spot', ['Australia', ' South Africa']).
+found('Phytophthora root rot', ['Worldwide (macadamia-growing regions)']).
+found('Raceme Blight', ['high altitude']).
+found('Macadamia Quick Decline', ['high rainfall areas']).
 found('Macadamia nut borer', ['Africa', ' Australia']).
 found('Stink bugs', ['Africa', ' Asia', ' Americas']).
 found('Macadamia felted coccid', ['Australia', ' South Africa', ' Hawaii']).

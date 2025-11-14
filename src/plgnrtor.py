@@ -24,6 +24,8 @@ def run():
     write_facts_to_file(generate_list_facts(dataframe, ColumnType.CONTROL))
     write_facts_to_file(generate_list_facts(dataframe, ColumnType.TREATMENT))
 
+
+#FIX: make sure facts are grouped together.
 def generate_disease_facts(dataframe: pd.DataFrame) -> list[str]:
     diseases = dataframe["name"].to_list()
     prolog_facts: list[str] = list()
