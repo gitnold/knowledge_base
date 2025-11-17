@@ -1,7 +1,9 @@
-import data
 import pandas as pd
 from enum import Enum, auto
 import ast
+import os
+from pandas import DataFrame
+import data
 
 class ColumnType(Enum):
     SYMPTOM = auto(),
@@ -11,15 +13,13 @@ class ColumnType(Enum):
 
 def run():
     dataframe = data.read_csv_file()
-    groups = dict(tuple(dataframe.groupby("type")))
+    #groups = dict(tuple(dataframe.groupby("type")))
     # inplace comparisons is also a technique instead of separate dataframes.
 
-    df_a = groups["pest"]
-    df_b = groups["disease"]
 
     #running the code generator.
-    write_facts_to_file(generate_disease_facts(df_b))
-    write_facts_to_file(generate_pest_facts(df_a))
+    write_facts_to_file(generate_disease_facts(dataframe))
+    write_facts_to_file(generate_pest_facts(dataframe))
     write_facts_to_file(generate_list_facts(dataframe, ColumnType.SYMPTOM))
     write_facts_to_file(generate_list_facts(dataframe, ColumnType.CONTROL))
     write_facts_to_file(generate_list_facts(dataframe, ColumnType.TREATMENT))
@@ -57,12 +57,17 @@ def handle_list_fields(values: list) -> list[str]:
     return ['a']
 
 def write_facts_to_file(facts: list[str]) -> int:
-    filepath = "knowledgebase.pro"
+    filepath = "../prolog/knowledgebase.pro"
     status = 0
+    filemode = "a"
     # try block below might be redundant as write operations create new file if missing.
     # check if a file exists first to determine mode to open fiule in.
+
+    # if not os.path.exists(filepath):
+    #     filemode = "w"
+    #
     try:
-        with open(filepath, "a") as pl_file:
+        with open(filepath, filemode) as pl_file:
             for fact in facts:
                 status = pl_file.write(fact)
     except FileNotFoundError:
@@ -113,7 +118,3 @@ def generate_list_facts(dataframe: pd.DataFrame, relation: ColumnType) -> list[s
         count += 1
 
     return prolog_facts
-
-
-
-

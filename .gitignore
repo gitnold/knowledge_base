@@ -1,5 +1,4 @@
-./src/knowledgebase.pro
 .pyre
 __pycache__
 ./src/.pyre
-*.pro
+venv
