@@ -23,6 +23,8 @@ def write_scientific_name(df: DataFrame) -> list[str]:
     count = 0
     prolog_facts: list[str] = list()
     prolog_facts.append("\n\n% scientific names of various pests\n")
+
+    #TODO: handle list values.
     for pest in pests:
         prolog_facts.append(f"scientific_name('{pest}', '{names[count]}').\n")
         count += 1
