@@ -16,7 +16,7 @@ The parser normalizes symptom text to lowercase and strips spaces/quotes.
 """
 
 import re
-from z3 import Solver, Bool, Or, Not
+from z3 import Solver, Bool, Or, Not, sat
 
 # ---- Parsing Prolog facts with support for multiple common styles ----
 def parse_prolog_kb(prolog_text):
@@ -30,10 +30,10 @@ def parse_prolog_kb(prolog_text):
         syms = []
         if syms_raw:
             for s in re.split(r',\s*', syms_raw):
-                s_clean = re.sub(r\"^\\s*'?|'?\\s*$\", '', s).strip().lower()
+                s_clean = re.sub(r"^\\s*'?|'?\\s*$", '', s.strip().lower())
                 if s_clean:
                     syms.append(s_clean)
-        disease_to_symptoms[name] = list(dict.fromkeys(syms))  # keep order, dedupe
+                    disease_to_symptoms[name] = list(dict.fromkeys(syms))  # keep order, dedupe
 
     # 2) disease(NAME).  (no symptoms listed)
     pat_name_only = re.compile(r"disease\(\s*'?(?P<name>[^']+)'?\s*\)\s*\.", re.IGNORECASE)
@@ -103,12 +103,12 @@ def z3_find_diseases(disease_to_symptoms, observed_symptoms, max_models=10):
 
 # ---- Example usage when run as a script ----
 if __name__ == '__main__':
-    kb_path = 'knowledgebase.pro'
+    kb_path = '../prolog/kb_lists.pro'
     try:
         with open(kb_path, 'r', encoding='utf-8') as f:
             content = f.read()
     except FileNotFoundError:
-        print('knowledgebase.pro not found - please place it next to this script.')
+        print('../prolog/kb_lists.pro not found - please place it next to this script.')
         content = ''
 
     facts = parse_prolog_kb(content)
